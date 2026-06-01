@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\RouteController;
 
 
 /*
@@ -29,3 +33,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class,'me']);
 
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('users', UserController::class);
+});
+
+Route::get(
+    '/dashboard',
+    [DashboardController::class,'index']
+);
+
+Route::apiResource(
+    'route-masters',
+    RouteController::class
+);
